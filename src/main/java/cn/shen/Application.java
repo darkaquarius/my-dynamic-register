@@ -16,9 +16,6 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Application {
 
-    @Autowired
-    private HTTPRequestRegistrar requestRegistrar;
-
     public static void main(String[] args) {
         SpringApplication springApplication = new SpringApplication(Application.class);
         springApplication.run(args);
@@ -27,6 +24,8 @@ public class Application {
     /**
      * 注册bean
      * 方法一：直接生成IRequestApi
+     *
+     * 这里是写死了，要注入IRequestApi
      */
     // @Bean
     // public IRequestApi requestApi() {
@@ -50,13 +49,15 @@ public class Application {
     /**
      * 注册bean
      * 方法二：生成FactoryBean
+     *
+     * 这里是写死了，要注入IRequestApi
      */
     @Bean
     public FactoryBean<IRequestApi> requestApi() {
         FactoryBean<IRequestApi> factoryBean = new FactoryBean<IRequestApi>() {
             @Override
             public IRequestApi getObject() throws Exception {
-                return requestRegistrar.createProxy(getObjectType());
+                return HTTPRequestRegistrar.createProxy(getObjectType());
             }
 
             @Override

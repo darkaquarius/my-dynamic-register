@@ -15,16 +15,15 @@ import java.util.HashMap;
  *
  */
 
-@Component
 public class HTTPRequestRegistrar {
 
     /**
      * 生成代理类
      */
     @SuppressWarnings("unchecked")
-    public <T> T createProxy(Class<T> classType) {
+    public static <T> T createProxy(Class<T> classType) {
         return  (T) Proxy.newProxyInstance(
-            this.getClass().getClassLoader(),
+            HTTPRequestRegistrar.class.getClassLoader(),
             new Class[]{classType},
             (proxy, method, args) -> {
                 MethodInfo methodInfo = MethodInfoHelper.extractMethodInfo(method);

@@ -1,9 +1,7 @@
-package cn.shen.proxy;
+package cn.shen.httpUtil;
 
 import cn.shen.bean.MethodInfo;
-import cn.shen.httpUtil.annotation.HttpRequest;
 import cn.shen.util.MethodInfoHelper;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
@@ -15,7 +13,7 @@ import java.util.HashMap;
  *
  */
 
-public class HTTPRequestRegistrar {
+public class HttpUtilRegistry {
 
     /**
      * 生成代理类
@@ -23,7 +21,7 @@ public class HTTPRequestRegistrar {
     @SuppressWarnings("unchecked")
     public static <T> T createProxy(Class<T> classType) {
         return  (T) Proxy.newProxyInstance(
-            HTTPRequestRegistrar.class.getClassLoader(),
+            HttpUtilRegistry.class.getClassLoader(),
             new Class[]{classType},
             (proxy, method, args) -> {
                 MethodInfo methodInfo = MethodInfoHelper.extractMethodInfo(method);

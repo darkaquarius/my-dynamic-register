@@ -1,6 +1,7 @@
 package cn.shen.http;
 
 import cn.shen.httpUtil.annotation.HttpRequest;
+import cn.shen.httpUtil.annotation.HttpUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -11,7 +12,7 @@ import java.util.Map;
  * @date 2019-07-10 16:05
  */
 
-@Component
+@HttpUtil
 public interface IRequestApi {
 
     @HttpRequest(method= RequestMethod.GET, url = "http://www.baidu.com")

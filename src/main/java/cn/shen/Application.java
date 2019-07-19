@@ -1,12 +1,8 @@
 package cn.shen;
 
-import cn.shen.http.IRequestApi;
-import cn.shen.proxy.HTTPRequestRegistrar;
-import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.annotation.Autowired;
+import cn.shen.httpUtil.annotation.EnableHttpUtil;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 /**
  * @author huishen
@@ -14,6 +10,7 @@ import org.springframework.context.annotation.Bean;
  */
 
 @SpringBootApplication
+@EnableHttpUtil
 public class Application {
 
     public static void main(String[] args) {
@@ -46,26 +43,26 @@ public class Application {
     //     return ret;
     // }
 
-    /**
-     * 注册bean
-     * 方法二：生成FactoryBean
-     *
-     * 这里是写死了，要注入IRequestApi
-     */
-    @Bean
-    public FactoryBean<IRequestApi> requestApi() {
-        FactoryBean<IRequestApi> factoryBean = new FactoryBean<IRequestApi>() {
-            @Override
-            public IRequestApi getObject() throws Exception {
-                return HTTPRequestRegistrar.createProxy(getObjectType());
-            }
-
-            @Override
-            public Class<IRequestApi> getObjectType() {
-                return IRequestApi.class;
-            }
-        };
-        return factoryBean;
-    }
+    // /**
+    //  * 注册bean
+    //  * 方法二：生成FactoryBean
+    //  *
+    //  * 这里是写死了，要注入IRequestApi
+    //  */
+    // @Bean
+    // public FactoryBean<IRequestApi> requestApi() {
+    //     FactoryBean<IRequestApi> factoryBean = new FactoryBean<IRequestApi>() {
+    //         @Override
+    //         public IRequestApi getObject() throws Exception {
+    //             return HttpUtilRegistry.createProxy(getObjectType());
+    //         }
+    //
+    //         @Override
+    //         public Class<IRequestApi> getObjectType() {
+    //             return IRequestApi.class;
+    //         }
+    //     };
+    //     return factoryBean;
+    // }
 
 }
